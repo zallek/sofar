@@ -11,23 +11,22 @@ const SofarForm = React.createClass({
       lat: PropTypes.number.isRequired,
       lng: PropTypes.number.isRequired,
     }).isRequired,
-    containerProps: PropTypes.object,
+    zoom: PropTypes.number,
   },
 
   render() {
-    let { center, containerProps, ...otherProps } = this.props;
+    let { center, zoom, ...otherProps } = this.props;
     return (
       <GoogleMaps
         containerProps={{
           style: {
-            height: '100%',
+            height: '70%',
           },
-          ...containerProps,
+          ...otherProps,
         }}
         googleMapsApi={ google.maps }
         center={ center }
-        zoom={ 8 }
-        { ...otherProps }
+        zoom={ zoom || 8 }
       />
     );
   },

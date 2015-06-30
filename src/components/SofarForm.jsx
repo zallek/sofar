@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Input } from 'react-bootstrap';
+import { Input, Button } from 'react-bootstrap';
 
 
 const SofarForm = React.createClass({
@@ -7,16 +7,21 @@ const SofarForm = React.createClass({
   displayName: 'SofarForm',
 
   propTypes: {
-    startPosition: PropTypes.string,
+    position: PropTypes.string,
+    onGeolocation: PropTypes.func.isRequired,
   },
 
   render() {
-    let { startPosition } = this.props;
+    let { position, onGeolocation } = this.props;
+
+    const GeolocationButton = <Button title="Geolocation" onClick={ onGeolocation }><i className="fa fa-map-marker"></i></Button>;
+
     return (
       <form className="SofarForm">
         <div className="form-group">
-          <label htmlFor="startPosition">Start Position</label>
-          <Input type="text" className="form-control" id="startPosition" placeholder="Position" value={startPosition} />
+          <label htmlFor="position">Start Position</label>
+          <Input type="text" className="form-control" id="position"
+                 placeholder="Position" buttonAfter={ GeolocationButton } value={position} />
         </div>
       </form>
     );

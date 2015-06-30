@@ -115,7 +115,7 @@
         "no-throw-literal":         2,
         "no-unused-expressions":    2,
         "no-void":                  2,
-        "no-warning-comments":      [1, { "terms": ["TODO", "WORKAROUND", "FIXME"], "location": "anywhere" }],
+        "no-warning-comments":      [1, { "terms": ["WORKAROUND", "FIXME"], "location": "anywhere" }],
         "no-with":                  2,
         "radix":                    0,
         "vars-on-top":              0,
