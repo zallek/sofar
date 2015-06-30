@@ -11,6 +11,11 @@
         "es6": true,
     },
 
+    "globals": {
+        // google APIs are not CommonJS
+        "google": true,
+    },
+
     "rules": {
 
         //React rules
@@ -137,7 +142,7 @@
         "array-bracket-spacing":      [2, "never"],
         "camelcase":                  2,
         "comma-style":                [2, "last"],
-        "computed-property-spacing":  [2, "never"],
+        //"computed-property-spacing":  [2, "never"],
         "eol-last":                   2,
         "indent":                     [2, 2],
         "new-cap":                    [2, {newIsCap: true}], // Immutable collections and React mixins do not respect this rule

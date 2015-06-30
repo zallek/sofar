@@ -13,14 +13,12 @@ const SofarForm = React.createClass({
   render() {
     let { startPosition } = this.props;
     return (
-      <div className="SofarForm">
-        <form className="SofarForm-form">
-          <div className="form-group">
-            <label htmlFor="startPosition">Start Position</label>
-            <Input type="text" class="form-control" id="startPosition" placeholder="Position" value={startPosition} />
-          </div>
-        </form>
-      </div>
+      <form className="SofarForm">
+        <div className="form-group">
+          <label htmlFor="startPosition">Start Position</label>
+          <Input type="text" className="form-control" id="startPosition" placeholder="Position" value={startPosition} />
+        </div>
+      </form>
     );
   },
 
