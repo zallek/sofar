@@ -2,31 +2,34 @@ import React, { PropTypes } from 'react';
 import { Input, Button } from 'react-bootstrap';
 
 
-const SofarForm = React.createClass({
+export default class SofarForm {
 
-  displayName: 'SofarForm',
+  static displayName = 'SofarForm';
 
-  propTypes: {
-    position: PropTypes.string,
-    onGeolocation: PropTypes.func.isRequired,
-  },
+  static propTypes = {
+    startingPoint: PropTypes.shape({
+      label: PropTypes.string.isRequired,
+    }),
+    geolocate: PropTypes.func.isRequired,
+  };
 
   render() {
-    let { position, onGeolocation } = this.props;
+    let {
+      startingPoint,
+      geolocate,
+    } = this.props;
 
-    const GeolocationButton = <Button title="Geolocation" onClick={ onGeolocation }><i className="fa fa-map-marker"></i></Button>;
+    const GeolocationButton = <Button title="Geolocation" onClick={ geolocate }><i className="fa fa-map-marker"></i></Button>;
 
     return (
       <form className="SofarForm">
         <div className="form-group">
           <label htmlFor="position">Start Position</label>
           <Input type="text" className="form-control" id="position"
-                 placeholder="Position" buttonAfter={ GeolocationButton } value={position} />
+                 placeholder="Position" buttonAfter={ GeolocationButton } value={ startingPoint.label } />
         </div>
       </form>
     );
-  },
+  }
 
-});
-
-export default SofarForm;
+}

@@ -29,6 +29,7 @@
     "font-awesome": "^4.3.0",
     "react": "~0.13.0",
     "react-bootstrap": "~0.23.5",
-    "react-google-maps": "^1.7.0"
+    "react-google-maps": "^1.7.0",
+    "redux": "^0.12.0"
   }
 }

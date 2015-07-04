@@ -2,17 +2,17 @@ import React, { PropTypes } from 'react';
 import { GoogleMaps } from 'react-google-maps';
 
 
-const SofarForm = React.createClass({
+export default class SofarForm {
 
-  displayName: 'SofarMap',
+  static displayName = 'SofarMap';
 
-  propTypes: {
+  static propTypes = {
     center: PropTypes.shape({
       lat: PropTypes.number.isRequired,
       lng: PropTypes.number.isRequired,
     }).isRequired,
     zoom: PropTypes.number,
-  },
+  };
 
   render() {
     let { center, zoom, ...otherProps } = this.props;
@@ -26,11 +26,9 @@ const SofarForm = React.createClass({
         }}
         googleMapsApi={ google.maps }
         center={ center }
-        zoom={ zoom || 8 }
+        zoom={ zoom || 13 }
       />
     );
-  },
+  }
 
-});
-
-export default SofarForm;
+}
