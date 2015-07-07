@@ -10,6 +10,10 @@ var srcPath = resolve('./src');
 var npmPath = resolve('./node_modules');
 var distPath = resolve('./node_modules');
 
+var autoprefixerConfig = {
+  browsers: ['Firefox > 27', 'Chrome > 20', 'Explorer > 9', 'Safari > 6', 'Opera > 11.5', 'iOS > 6.1'],
+};
+
 module.exports = {
   devtool: 'eval',
   entry: [
@@ -31,10 +35,24 @@ module.exports = {
     root: [srcPath, npmPath],
   },
   module: {
-    loaders: [{
+    preloaders: [{
       test: /\.jsx?$/,
-      loaders: ['react-hot-loader', 'babel-loader?stage=0', 'eslint-loader'],
-      include: srcPath,
-    }]
-  }
+      loaders: ['eslint'],
+      include: [srcPath],
+    }],
+    loaders: [
+      {
+        test: /\.css$/,
+        loader: 'style!css!autoprefixer?' + JSON.stringify(autoprefixerConfig),
+      },
+      {
+        test: /\.jsx?$/,
+        loaders: ['react-hot', 'babel?stage=0'],
+        include: [
+          srcPath,
+          resolve('./node_modules/react-geosuggest/'),
+        ],
+      },
+    ],
+  },
 };
