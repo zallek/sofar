@@ -2,25 +2,26 @@ import React, { PropTypes } from 'react';
 import Geosuggest from 'react-geosuggest';
 import { Button } from 'react-bootstrap';
 
+import * as SofarPropTypes from 'proptypes/SofarPropTypes';
+
+
 export default class SofarForm {
 
   static displayName = 'SofarForm';
 
   static propTypes = {
-    startingPoint: PropTypes.shape({
-      label: PropTypes.string.isRequired,
-    }),
+    startLocation: SofarPropTypes.location,
     geolocate: PropTypes.func.isRequired,
-    setStartingPosition: PropTypes.func.isRequired,
+    setStartLocation: PropTypes.func.isRequired,
   };
 
   onSuggestSelect(suggest) {
-    this.props.setStartingPosition(suggest);
+    this.props.setStartLocation(suggest);
   }
 
   render() {
     let {
-      startingPoint,
+      startLocation,
       geolocate,
     } = this.props;
 
@@ -31,8 +32,8 @@ export default class SofarForm {
           <div className="input-group" id="position">
             <Geosuggest
               placeholder="Position"
-              value={ startingPoint ? startingPoint.label : '' }
-              onSuggestSelect={this.onSuggestSelect}
+              value={ startLocation ? startLocation.label : '' }
+              onSuggestSelect={::this.onSuggestSelect}
             />
             <span className="input-group-btn">
               <Button title="Geolocation" onClick={ geolocate }>

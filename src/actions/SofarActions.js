@@ -1,23 +1,34 @@
 import * as ActionTypes from 'constants/ActionTypes';
 import Geolocation from 'utils/Geolocation';
+import * as Destinations from 'mocks/DestinationsMock';
 
 
-export function setStartingPosition(position) {
-  return {
-    type: ActionTypes.SOFAR_SET_STARTING_POSITION,
-    position,
+export function setStartLocation(startLocation) {
+  return (dispatch) => {
+    dispatch({
+      type: ActionTypes.SOFAR_SET_START_LOCATION,
+      startLocation,
+    });
+    dispatch(computeDestinationLocations(startLocation.location));
   };
 }
 
 export function geolocate() {
   return (dispatch) => {
     Geolocation.getCurrentPosition((position) => {
-      position = position.coords;
-      let { latitude, longitude } = position;
-      dispatch(setStartingPosition({
+      let location = position.coords;
+      let { latitude, longitude } = location;
+      dispatch(setStartLocation({
         label: `Latitude: ${latitude} Longitude: ${longitude}`,
-        position,
+        location,
       }));
     }); //@TODO handle fail case
+  };
+}
+
+export function computeDestinationLocations(startingPoint) {
+  return {
+    type: ActionTypes.SOFAR_SET_DESTINATION_LOCATIONS,
+    destinationLocations: Destinations.computeDestinationLocations(startingPoint),
   };
 }

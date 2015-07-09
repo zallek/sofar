@@ -1,1 +1,1 @@
-export { default as sofar } from './sofar';
+export { default as sofar } from './SofarStore';
