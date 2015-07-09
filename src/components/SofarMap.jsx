@@ -1,15 +1,11 @@
 import React, { PropTypes } from 'react';
-import { GoogleMaps, Circle } from 'react-google-maps';
+import { GoogleMaps, Marker, Circle } from 'react-google-maps';
+import _ from 'lodash';
 
 import * as SofarPropTypes from 'proptypes/SofarPropTypes';
+import { computeLegend } from 'utils/Legend';
+import { NB_MAP_LEGEND_PARTS } from 'config';
 
-
-function convertRawLocation(rawLocation) {
-  return {
-    lat: rawLocation.latitude,
-    lng: rawLocation.longitude,
-  };
-}
 
 export default class SofarForm {
 
@@ -24,6 +20,17 @@ export default class SofarForm {
 
   render() {
     let { center, startLocation, destinationLocations, zoom, ...otherProps } = this.props;
+
+    if (destinationLocations.length > 0) {
+      let values = _.pluck(destinationLocations, 'estimatedDuration');
+      let legendParts = computeLegend(values, NB_MAP_LEGEND_PARTS);
+
+      destinationLocations = destinationLocations.map(location => ({
+        color: _.find(legendParts, part => location.estimatedDuration <= part.max).color,
+        ...location,
+      }));
+    }
+
     return (
       <GoogleMaps
         containerProps={{
@@ -36,18 +43,24 @@ export default class SofarForm {
         center={ convertRawLocation(center) }
         zoom={ zoom || 11 }
       >
-        { startLocation ?
-          <Circle center={convertRawLocation(center)} radius={2000}
-                  fillColor="red" fillOpacity={0.20}
-                  strokeColor="red" strokeOpacity={1} strokeWeight={1} />
-        : null}
-        { destinationLocations.map( location =>
-          <Circle center={convertRawLocation(location.location)} radius={1000}
-                  fillColor="green" fillOpacity={0.20}
-                  strokeColor="green" strokeOpacity={1} strokeWeight={1} />
+        { startLocation &&
+          <Marker position={ convertRawLocation(center) } />
+        }
+        { destinationLocations.map(location =>
+          <Circle key={ JSON.stringify(location.location) } //@TODO find a less hacky key
+                  center={ convertRawLocation(location.location) } radius={ 1000 }
+                  fillColor={ location.color } fillOpacity={0.20}
+                  strokeColor={ location.color } strokeOpacity={1} strokeWeight={ 1 } />
         )}
       </GoogleMaps>
     );
   }
 
+}
+
+function convertRawLocation(rawLocation) {
+  return {
+    lat: rawLocation.latitude,
+    lng: rawLocation.longitude,
+  };
 }

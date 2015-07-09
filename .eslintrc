@@ -145,7 +145,7 @@
         //"computed-property-spacing":  [2, "never"],
         "eol-last":                   2,
         "indent":                     [2, 2],
-        "new-cap":                    [2, {newIsCap: true}], // Immutable collections and React mixins do not respect this rule
+        "new-cap":                    0,
         "no-new-object":              2,
         "no-underscore-dangle":       0, // allow private naming with _
         "object-curly-spacing":       [2, "always"],

@@ -46,6 +46,10 @@ module.exports = {
         loader: 'style!css!autoprefixer?' + JSON.stringify(autoprefixerConfig),
       },
       {
+        test: /\.json$/,
+        loader: 'json',
+      },
+      {
         test: /\.jsx?$/,
         loaders: ['react-hot', 'babel?stage=0'],
         include: [
