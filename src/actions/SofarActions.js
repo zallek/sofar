@@ -9,18 +9,18 @@ export function setStartLocation(startLocation) {
       type: ActionTypes.SOFAR_SET_START_LOCATION,
       startLocation,
     });
-    dispatch(computeDestinationLocations(startLocation.location));
+    dispatch(computeDestinationLocations(startLocation.coords));
   };
 }
 
 export function geolocate() {
   return (dispatch) => {
     Geolocation.getCurrentPosition((position) => {
-      let location = position.coords;
-      let { latitude, longitude } = location;
+      let coords = position.coords;
+      let { latitude, longitude } = coords;
       dispatch(setStartLocation({
         label: `Latitude: ${latitude} Longitude: ${longitude}`,
-        location,
+        coords,
       }));
     }); //@TODO handle fail case
   };

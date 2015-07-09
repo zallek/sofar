@@ -35,7 +35,7 @@ export default class SofarBox {
           { ...bindActionCreators(SofarActions, dispatch) }
         />
         <SofarMap
-          center={ startLocation ? startLocation.location : DEFAULT_MAP_CENTER }
+          center={ startLocation ? startLocation.coords : DEFAULT_MAP_CENTER }
           startLocation={ startLocation }
           destinationLocations={ destinationLocations }
         />

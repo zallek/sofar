@@ -12,7 +12,7 @@ export default class SofarForm {
   static displayName = 'SofarMap';
 
   static propTypes = {
-    center: SofarPropTypes.rawLocation.isRequired,
+    center: SofarPropTypes.coordinates.isRequired,
     startLocation: SofarPropTypes.location,
     destinationLocations: PropTypes.arrayOf(SofarPropTypes.location),
     zoom: PropTypes.number,
@@ -40,15 +40,15 @@ export default class SofarForm {
           ...otherProps,
         }}
         googleMapsApi={ google.maps }
-        center={ convertRawLocation(center) }
+        center={ convertCoordinates(center) }
         zoom={ zoom || 11 }
       >
         { startLocation &&
-          <Marker position={ convertRawLocation(center) } />
+          <Marker position={ convertCoordinates(startLocation.coords) } />
         }
         { destinationLocations.map(location =>
-          <Circle key={ JSON.stringify(location.location) } //@TODO find a less hacky key
-                  center={ convertRawLocation(location.location) } radius={ 1000 }
+          <Circle key={ JSON.stringify(location.coords) } //@TODO find a less hacky key
+                  center={ convertCoordinates(location.coords) } radius={ 1000 }
                   fillColor={ location.color } fillOpacity={0.20}
                   strokeColor={ location.color } strokeOpacity={1} strokeWeight={ 1 } />
         )}
@@ -58,9 +58,9 @@ export default class SofarForm {
 
 }
 
-function convertRawLocation(rawLocation) {
+function convertCoordinates(coordinates) {
   return {
-    lat: rawLocation.latitude,
-    lng: rawLocation.longitude,
+    lat: coordinates.latitude,
+    lng: coordinates.longitude,
   };
 }

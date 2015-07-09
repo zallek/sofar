@@ -19,7 +19,7 @@ export function computeDestinationLocations(startLocation) {
       let deltaX = i * LOCATIONS_SPACING;
       let deltaY = j * LOCATIONS_SPACING;
       destinationsLocations.push({
-        location: {
+        coords: {
           latitude: startLocation.latitude + deltaX,
           longitude: startLocation.longitude + deltaY,
         },
