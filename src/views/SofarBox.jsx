@@ -5,6 +5,7 @@ import { connect } from 'redux/react';
 import SofarForm from 'components/SofarForm';
 import SofarMap from 'components/SofarMap';
 import * as SofarActions from 'actions/SofarActions';
+import { DEFAULT_MAP_CENTER } from 'config';
 
 
 @connect(state => ({
@@ -21,6 +22,7 @@ export default class SofarBox {
 
   render() {
     const { startingPoint, dispatch } = this.props;
+    let mapCenter = startingPoint || DEFAULT_MAP_CENTER;
 
     return (
       <div className="SofarBox">
@@ -30,8 +32,8 @@ export default class SofarBox {
         />
         <SofarMap
           center={{
-            lat: startingPoint.position.latitude,
-            lng: startingPoint.position.longitude,
+            lat: mapCenter.position.latitude,
+            lng: mapCenter.position.longitude,
           }}
         />
       </div>

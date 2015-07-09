@@ -1,9 +1,8 @@
 import * as ActionTypes from 'constants/ActionTypes';
-import { DEFAULT_MAP_CENTER } from 'config';
 
 
 const initialState = {
-  startingPoint: DEFAULT_MAP_CENTER,
+  startingPoint: null,
 };
 
 export default function sofar(state = initialState, action) {

@@ -33,10 +33,9 @@ export default class SofarForm {
           <div className="form-control" id="position">
             <Geosuggest
               placeholder="Position"
-              value={ startingPoint.label }
+              value={ startingPoint ? startingPoint.label : '' }
               onSuggestSelect={this.onSuggestSelect}
-              location={new google.maps.LatLng(53.558572, 9.9278215)}
-              radius="20" />
+            />
             <Button title="Geolocation" onClick={ geolocate }>
               <i className="fa fa-map-marker"></i>
             </Button>
