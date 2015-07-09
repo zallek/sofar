@@ -7,6 +7,7 @@ import SofarMap from 'components/SofarMap';
 import * as SofarActions from 'actions/SofarActions';
 import { DEFAULT_MAP_CENTER } from 'config';
 
+import './SofarBox.css';
 
 @connect(state => ({
   startingPoint: state.sofar.startingPoint,
@@ -16,7 +17,7 @@ export default class SofarBox {
   static displayName = 'SofarBox';
 
   static propTypes = {
-    startingPoint: PropTypes.object.isRequired,
+    startingPoint: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
   }
 

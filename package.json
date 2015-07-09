@@ -21,6 +21,7 @@
     "eslint-loader": "^0.14.1",
     "eslint-plugin-react": "^2.6.3",
     "node-libs-browser": "^0.5.2",
+    "react-classmap": "^0.1.0",
     "react-hot-loader": "^1.2.7",
     "style-loader": "^0.12.3",
     "webpack": "^1.10.0",
